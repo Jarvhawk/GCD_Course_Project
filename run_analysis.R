@@ -10,8 +10,6 @@ if(!file.exists("UCI HAR Dataset")) {
 }
 
 
-actLabels <- read.table("UCI HAR Dataset/activity_labels.txt")
-actLabels[,2] <- as.character(actLabels[,2])
 features <- read.table("UCI HAR Dataset/features.txt")
 features[,2] <- as.character(features[,2])
 
@@ -31,6 +29,8 @@ mergedData <- rbind(test, train)
 
 colnames(mergedData) <- c("subject", "activity", features[featuresReq, 2])
 
+actLabels <- read.table("UCI HAR Dataset/activity_labels.txt")
+actLabels[,2] <- as.character(actLabels[,2])
 mergedData$activity <- factor(mergedData$activity)
 mergedData$activity <- factor(mergedData$activity, labels = as.character(actLabels$V2))
 
