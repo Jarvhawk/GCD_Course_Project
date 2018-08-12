@@ -12,7 +12,6 @@ if(!file.exists("UCI HAR Dataset")) {
 
 features <- read.table("UCI HAR Dataset/features.txt")
 features[,2] <- as.character(features[,2])
-
 featuresReq <- grep("-(mean|std)\\(\\)", features[,2])
 
 testSubject   <- read.table("UCI HAR Dataset/test/subject_test.txt")
@@ -43,6 +42,7 @@ names(mergedData) <- gsub("BodyBody", "Body", names(mergedData))
 
 tidyData <- aggregate(. ~subject + activity, mergedData, mean)
 tidyData <- tidyData[order(tidyData$subject, tidyData$activity),]
+
 write.table(tidyData, file = "tidyData.txt", row.names = FALSE)
 
 
